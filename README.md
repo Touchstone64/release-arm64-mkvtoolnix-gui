@@ -5,9 +5,9 @@ The script and patches in this repo are the only elements that can be attributed
 
 These artefacts have been used to build signed releases of the MKVToolNix GUI as described below:
 
-| repo | macOS | MVKToolNix GUI |
-|:----:|:-----:|:--------------:|
-| 0.1 | 26.4.1 | 98.0 |
+| repo | macOS | MVKToolNix GUI | Disk image |
+|:----:|:-----:|:--------------:|:----------:|
+| 0.1 | 26.4.1 | 98.0 | [download](https://www.gweb.me.uk/dmg/arm64-mkvtoolnix-gui/MKVToolNix-98.0.dmg) |
 
 
 
