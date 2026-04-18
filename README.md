@@ -3,15 +3,13 @@ These are the artefacts I needed to build a signed MKVToolNix GUI for Apple Sili
 
 The script and patches in this repo are the only elements that can be attributed to [me](mailto:touchstone64@gweb.me.uk). The MKVToolNix GUI and associated tools are created and owned by Moritz Bunkus and are thoroughly [documented here](https://mkvtoolnix.download/index.html).
 
-These artefacts have been used to build signed releases of the MKVToolNix GUI as described below:
+These artefacts have been used to build signed and notarized releases of the MKVToolNix GUI as described below:
 
 | repo | macOS | MVKToolNix GUI | Disk image |
 |:----:|:-----:|:--------------:|:----------:|
 | 0.1 | 26.4.1 | 98.0 | [download](https://www.gweb.me.uk/dmg/arm64-mkvtoolnix-gui/MKVToolNix-98.0.dmg) |
 
-
-
-The rest of this README.md file is essentially a record of the steps taken to build an MVKToolNix GUI disk image ready for installation on macOS.
+The rest of this README.md file is essentially a record of the steps taken to build an MVKToolNix GUI disk image ready for installation on macOS. I've yet to automate or document notarization of the app, so while the GUI in the disk image will pass through Gatekeeper, following the steps below will not result in a notarized app.
 
 ## Export a code-signing certificate
 On a Mac used to sign macOS applications, open Keychain Access and in the login keychain, click My Certificates and export your Developer ID Application certificate using 'File | Export Items' and select the file format 'Personal Information Exchange (.p12)'. 
