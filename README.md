@@ -50,8 +50,8 @@ The text 'your terminal' refers to your chosen terminal emulator, be it the macO
 ## Build the release
 Using release 98.0 as an example, in your terminal:
 - Choose or create a working directory for this project and change to it
-- Clone this repo using `git clone https://github.com/Touchstone64/release-mkvtoolnix.git`
-- Use `cd ./release-mkvtoolnix` to change to the repo directory
+- Clone this repo using `git clone https://github.com/Touchstone64/release-arm64-mkvtoolnix-gui.git`
+- Use `cd ./release-arm64-mkvtoolnix-gui` to change to the repo directory
 - Run `./prep_to_build_mkvtoolnix_release.sh 98.0` to prepare to build and sign release 98.0
 - Use `cd ./release-98.0/packaging/macos` to change to the release's macos packaging directory
 - Run `./build.sh` to build all of the component parts of the MKVToolNix GUI. This will take some time.
