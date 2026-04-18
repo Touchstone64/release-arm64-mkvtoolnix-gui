@@ -45,7 +45,6 @@ The text 'your terminal' refers to your chosen terminal emulator, be it the macO
 - If you chose to create a new Developer ID Certificate, install it using Keychain Access.
 - In Keychain Access, select My Certificates in the login keychain and inspect your 'Developer ID Application' certificate to ensure it's trusted.
 - In your terminal, run `security find-identity -p codesigning` to review the code-signing identities now recognised by the OS to ensure your certificate is installed as expected
-- Install Homebrew as described [on the site](https://brew.sh) (and be sure to add the dot-file changes described at the end of the installation)
 
 ## Build the release
 Using release 98.0 as an example, in your terminal:

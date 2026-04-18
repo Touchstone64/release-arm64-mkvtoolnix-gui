@@ -13,28 +13,6 @@ fi
 
 set -e
 
-function ensure_dockbook_xsl() {
-    DOCBOOK_XSL_FORMULA="docbook-xsl"
-    BREW_BINARY=$(which brew)
-
-    if [ ! -d  "$DOCBOOK_XSL_NS_DIR" ]; then
-        if [ ! -x "$BREW_BINARY" ]; then
-            echo "HomeBrew is needed to install DocBook XSL. Install" \
-                " HomeBrew or provide your own distribution of DocBook XSL."
-            exit 2
-        fi
-
-        echo "Installing DocBook XSL:"
-        "$BREW_BINARY" install "$DOCBOOK_XSL_FORMULA"
-    else
-        echo "Updating DocBook XSL:"
-        "$BREW_BINARY" update "$DOCBOOK_XSL_FORMULA"
-    fi
-
-}
-
-ensure_dockbook_xsl
-
 RELEASE_DIR="$SCRIPT_DIR"/release-$RELEASE
 if [ -d "$RELEASE_DIR" ]; then
     echo "Updating release-$RELEASE"
