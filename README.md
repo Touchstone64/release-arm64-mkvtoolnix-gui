@@ -7,11 +7,12 @@ These artefacts have been used to build notarized releases of the MKVToolNix GUI
 
 | repo | macOS | MVKToolNix GUI | Disk image |
 |:----:|:-----:|:--------------:|:----------:|
-| 0.1 | 26.4.1 | 98.0 | [download](https://www.gweb.me.uk/dmg/arm64-mkvtoolnix-gui/MKVToolNix-98.0.dmg) |
+| 0.1 | 26.4.1 | 98.0 | [download](https://www.gweb.me.uk/dmg/arm64-mkvtoolnix-gui/0.1/MKVToolNix-98.0.dmg) |
+| 1.0 | 26.4.1 | 98.0 | [download](https://www.gweb.me.uk/dmg/arm64-mkvtoolnix-gui/1.0/MKVToolNix-98.0.dmg) |
 
 The rest of this README.md file is essentially a record of the steps taken to build, sign and notarize an MVKToolNix GUI disk image ready for installation on macOS.
 
-In this version of the repo, modifications to mkvtoolnix build and configuration scripts are applied as patches to the original source to achieve, for example, automated notarization. The goal is to incorporate these modifications into the mkvtoolnix source so that this repo becomes a benign packaging layer enabling distribution of notarized Apple Silicon (ARM64) MKVToolNix GUI releases.
+In release 1.0 of the repo, modifications to mkvtoolnix build and configuration scripts are applied as patches to the original source to achieve automated notarization. The goal is to incorporate these modifications into the mkvtoolnix source so that this repo becomes a benign packaging layer enabling distribution of notarized Apple Silicon (ARM64) MKVToolNix GUI releases.
 
 ## Export a code-signing certificate
 On a Mac used to sign macOS applications, open Keychain Access and in the login keychain, click My Certificates and export your Developer ID Application certificate using 'File | Export Items' and select the file format 'Personal Information Exchange (.p12)'. 
@@ -21,39 +22,39 @@ Provide a password and save the exported certificates. You'll use this export to
 (You may of course prefer to create a Developer ID Certificate signing request on the fresh macOS installation. This export process is the just the method I chose to use.)
 
 ## Create a fresh macOS Install
-Create a new APFS volume on your chosen internal or external drive and use  the 'Install macOS Tahoe' app to install macOS. The app can be downloaded from the App Store. A virtual machine (VM) can't be used because they don't support App Store installs, which we'll need to get Xcode.
+Create a new APFS volume on your chosen internal or external drive and use  the 'Install macOS Tahoe' app to install macOS. The app can be downloaded from the App Store. A virtual machine (VM) can't be used because they don't support App Store installs, which is required to get Xcode.
 
 ## Configure macOS
 Run through the installation of macOS, these are my preferences:
 
 - Set up as a new user to avoid environment pollution
 - For Apple Account: sign in later in Settings
-- Enable Location Services, Touch ID etc, as desired
+- Enable Location Services, Touch ID etc., as desired
 - Click 'Get Started' to ... get started
 - Configure trackpad, keyboard as desired
 - Rename Mac as desired
 
 Enable iCloud and any other macOS features as desired. Since this is an instance intended for a clean, from-source signed build I prefer to keep it as light as possible.
 
-The text 'your terminal' below refers to your chosen terminal emulator, be it the macOS Terminal app, [iTerm2](https://iterm2.com) or whatever your personal preference. If it's not macOS Terminal then you'll need to install it now.
+The text 'your terminal' below refers to your chosen terminal emulator, be it the macOS Terminal app, [iTerm2](https://iterm2.com) or whatever your personal preference. If it's not macOS Terminal then install it now.
 
 ## Setup build pre-requisites on macOS
 
 - Use the App Store to install Xcode (this is where you'll sign in with your Apple account)
 - Run Xcode and accept the license agreements
-- In your terminal, run `xcode-select —install` to install the command-line developer tools
+- In your terminal, run `xcode-select --install` to install the command-line developer tools
 - In your terminal, use `xcode-select -p` to check the location of the developer directory, it should be '/Applications/Xcode.app/Contents/Developer'
 
 ## Setup code-signing prerequisites on macOS
 - If you exported a working code-signing certificate above, open Keychain Access and use 'File | Import Items' to import the .p12 certificates file. (You may need to move one or more imported intermediate certificates to the System keychain.)
 - If you chose to create a new Developer ID Certificate, install it using Keychain Access.
 - In Keychain Access, select My Certificates in the login keychain and inspect your 'Developer ID Application' certificate to ensure it's trusted.
-- In your terminal, run `security find-identity -p codesigning` to review the code-signing identities now recognised by the OS to ensure your certificate is installed as expected
+- In your terminal, run `security find-identity -p codesigning` to review the code-signing identities now recognised by the OS to ensure your certificate is installed as expected.
 
 ## Setup notarization prerequisites on macOS
-For an Apple Developer, app notarization is getting easier. If you're just getting started, at the time of writing [this site](https://www.technotes.omnis.net/Technical%20Notes/Deployment/macOS%20notarization/index.html) is a really helpful resource to guide you through the stages.
+App notarization is getting easier. If you're just getting started, at the time of writing [this site](https://www.technotes.omnis.net/Technical%20Notes/Deployment/macOS%20notarization/index.html) is a helpful resource to guide you through the steps.
 
-To set up notarization you'll need your Apple acount email, app-specific password and team ID. (If you're not sure about any of these, review the site linked above.)
+To set up notarization you'll need your Apple acount email, an app-specific password and your team ID. (If you're not sure about any of these, review the site linked above.)
 
 - In your terminal, use `xcrun notarytool store-credentials --apple-id "<YOUR-APPLE-ID-EMAIL>" --password "<YOUR_APP-SPECIFIC-PASSWORD>" --team-id "<YOUR-TEAM-ID>"` to create your notary profile in the default keychain. When prompted, provide your notary profile name (for example, 'MyNotaryProfile').
 
@@ -72,8 +73,8 @@ Using release 98.0 as an example, in your terminal:
 ## Build the disk image
 - Use `cd ./release-98.0/packaging/macos` to change to the release's macos packaging directory
 - Run `./build.sh` to build all of the component parts of the MKVToolNix GUI. This will take some time.
-- Run `./build.sh dmg` to assemble, sign and optionally notarize the disk image for the release
+- Run `./build.sh dmg` to assemble, sign and (optionally) notarize the disk image for the release
 
 The build script uses ~/opt and ~/tmp to build and assemble all the component parts needed to create the MKVToolNix GUI from source.
 
-The signed and optionally notarized disk image will be located at (using release 98.0 as an example) ~/tmp/compile/MKVToolNix-98.0.dmg.
+The signed and (optionally) notarized disk image will be located at (using release 98.0 as an example) ~/tmp/compile/MKVToolNix-98.0.dmg.
