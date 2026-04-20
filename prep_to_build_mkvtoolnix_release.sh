@@ -3,19 +3,21 @@
 SCRIPT_NAME=$(basename ${0})
 SCRIPT_DIR=$(pwd)
 
-RELEASE="$*"
+RELEASE_VERSION="$*"
 
-if [[ -z ${RELEASE} ]]; then
+if [[ -z ${RELEASE_VERSION} ]]; then
     echo "usage: ${SCRIPT_NAME} <release>, for example: ${SCRIPT_NAME} 98.0"
     exit 1
 fi
 
 set -e
 
-RELEASE_DIR=${SCRIPT_DIR}/release-${RELEASE}
-if [[ ! -d ${RELEASE_DIR} ]]; then
-    git clone https://codeberg.org/mbunkus/mkvtoolnix --tag release-${RELEASE}
-fi
+RELEASE_TAG="release-${RELEASE_VERSION}"
+RELEASE_DIR=${SCRIPT_DIR}/${RELEASE_TAG}
+git clone -c advice.detachedHead=false \
+    --depth 1 --branch ${RELEASE_TAG} \
+    https://codeberg.org/mbunkus/mkvtoolnix \
+    ${RELEASE_DIR}
 
 echo "Creating config.local.sh for code-signing and notarization"
 MACOS_DIR=${RELEASE_DIR}/packaging/macos
@@ -46,7 +48,7 @@ fi
 echo
 echo "You're ready to:"
 echo
-echo "    cd ./release-${RELEASE}/packaging/macos"
+echo "    cd ./${RELEASE_TAG}/packaging/macos"
 echo "    ./build.sh"
 echo "    ./build.sh dmg"
 echo
