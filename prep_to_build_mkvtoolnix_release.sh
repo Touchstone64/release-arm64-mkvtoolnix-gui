@@ -13,12 +13,7 @@ fi
 set -e
 
 RELEASE_DIR=${SCRIPT_DIR}/release-${RELEASE}
-if [[ -d ${RELEASE_DIR} ]]; then
-    echo "Updating release-${RELEASE}"
-    cd ${RELEASE_DIR}
-    git --no-optional-locks fetch --tags origin; git pull
-    cd -
-else
+if [[ ! -d ${RELEASE_DIR} ]]; then
     git clone https://codeberg.org/mbunkus/mkvtoolnix --tag release-${RELEASE}
 fi
 
