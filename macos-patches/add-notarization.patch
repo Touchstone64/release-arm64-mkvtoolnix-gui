@@ -1,19 +1,19 @@
---- build.sh.bak	2026-04-19 18:06:38
-+++ build.sh	2026-04-20 09:39:13
-@@ -520,9 +520,11 @@
-     for FILE (${dmgcnt}/**/*(.)) {
+--- build.sh.bak	2026-04-20 16:31:07
++++ build.sh	2026-04-20 16:34:13
+@@ -517,8 +517,11 @@
        if [[ ${FILE} != */MacOS/mkv* ]] non_executables+=(${FILE})
      }
-+
-+    if [[ -n ${NOTARY_PROFILE} ]] harden="--options=runtime"
  
++    harden=""
++    if [[ -n ${NOTARY_PROFILE} ]] harden="--options=runtime"
++
      codesign --force --sign ${SIGNATURE_IDENTITY} ${non_executables}
 -    codesign --force --sign ${SIGNATURE_IDENTITY} ${dmgmac}/mkv*(.)
 +    codesign --force ${harden} --sign ${SIGNATURE_IDENTITY} ${dmgmac}/mkv*(.)
    fi
  
    if [[ -n $DMG_NO_DMG ]] return
-@@ -557,6 +559,10 @@
+@@ -553,6 +556,10 @@
  
    if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${dmgname}
  
