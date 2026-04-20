@@ -1,6 +1,6 @@
---- build.sh.bak	2026-04-18 14:44:46
-+++ build.sh	2026-04-19 17:23:54
-@@ -520,9 +520,15 @@
+--- build.sh.bak	2026-04-19 18:06:38
++++ build.sh	2026-04-20 09:39:13
+@@ -520,9 +520,11 @@
      for FILE (${dmgcnt}/**/*(.)) {
        if [[ ${FILE} != */MacOS/mkv* ]] non_executables+=(${FILE})
      }
@@ -10,10 +10,17 @@
      codesign --force --sign ${SIGNATURE_IDENTITY} ${non_executables}
 -    codesign --force --sign ${SIGNATURE_IDENTITY} ${dmgmac}/mkv*(.)
 +    codesign --force ${harden} --sign ${SIGNATURE_IDENTITY} ${dmgmac}/mkv*(.)
-+  fi
-+
-+  if [[ -n ${NOTARY_PROFILE} ]]; then
-+    xcrun notarytool submit ${dmgapp} --keychain-profile ${NOTARY_PROFILE} --wait
    fi
  
    if [[ -n $DMG_NO_DMG ]] return
+@@ -557,6 +559,10 @@
+ 
+   if [[ -n ${SIGNATURE_IDENTITY} ]] codesign --force -s ${SIGNATURE_IDENTITY} ${dmgname}
+ 
++  if [[ -n ${NOTARY_PROFILE} ]]; then
++    xcrun notarytool submit ${dmgname} --keychain-profile ${NOTARY_PROFILE} --wait
++  fi
++
+   if [[ ${dmgname} != ${dmgbuildname} ]] mv ${dmgname} ${dmgbuildname}
+ 
+   ln -s ${dmgbuildname} ${latest_link}
