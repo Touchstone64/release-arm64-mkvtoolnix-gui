@@ -5,7 +5,7 @@
        if [[ ${FILE} != */MacOS/mkv* ]] non_executables+=(${FILE})
      }
 +
-+    if [[ -n ${NOTARY_PROFILE} ]] harden="--options runtime"
++    if [[ -n ${NOTARY_PROFILE} ]] harden="--options=runtime"
  
      codesign --force --sign ${SIGNATURE_IDENTITY} ${non_executables}
 -    codesign --force --sign ${SIGNATURE_IDENTITY} ${dmgmac}/mkv*(.)
