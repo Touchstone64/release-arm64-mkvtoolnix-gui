@@ -10,15 +10,7 @@ if [[ ! -n ${MACOS_DIR} ]] || [[ ! -n ${PATH} ]]; then
     exit 1
 fi
 
-echo "SCRIPT_DIR: ${SCRIPT_DIR}"
-echo "MACOS_DIR: ${MACOS_DIR}"
-echo "PATCH: ${PATCH}"
-
 set -e 
-
-# PATCH_PATH="${SCRIPT_DIR}/${PATCH}"
-
-# echo "PATCH_PATH: ${PATCH_PATH}"
 
 if [[ ! -f ${PATCH} ]]; then
     echo "${SCRIPT_NAME}: patch '${PATCH}' not found"
@@ -36,15 +28,4 @@ if [[ ! -f ${TARGET_PATH} ]]; then
     exit 3
 fi
 
-# echo "SCRIPT_DIR: ${SCRIPT_DIR}"
-# echo "MACOS_DIR: ${MACOS_DIR}"
-# echo "PATCH: ${PATCH}"
-# echo "PATCH_PATH: ${PATCH_PATH}"
-# echo "TARGET: ${TARGET}"
-# echo "TARGET_PATH: ${TARGET_PATH}"
-
 patch -d ${MACOS_DIR} -p1 < ${PATCH}
-
-# if [[ -f ${TARGET} ]] && [[ -f ${PATCH_PATH} ]]; then
-#     patch -d ${MACOS_DIR} -p1 < ${PATCH_PATH}
-# fi
