@@ -1,5 +1,5 @@
---- build.sh.bak	2026-04-20 16:31:07
-+++ build.sh	2026-04-20 16:34:13
+--- build.sh.bak	2026-04-21 13:06:35
++++ build.sh	2026-04-21 13:37:55
 @@ -517,8 +517,11 @@
        if [[ ${FILE} != */MacOS/mkv* ]] non_executables+=(${FILE})
      }
