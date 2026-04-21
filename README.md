@@ -10,10 +10,11 @@ These artefacts have been used to build notarized releases of the MKVToolNix GUI
 | 0.1 | 26.4.1 | 98.0 | (deprecated) |
 | 1.0 | 26.4.1 | 98.0 | (deprecated) |
 | 1.1 | 26.4.1 | 98.0 | [download](https://www.gweb.me.uk/dmg/arm64-mkvtoolnix-gui/1.1/MKVToolNix-98.0.dmg) |
-
-The rest of this README.md file is essentially a record of the steps taken to build, sign and notarize an MVKToolNix GUI disk image ready for installation on macOS.
+| 1.2 | 26.4.1 | 98.0 | [download](https://www.gweb.me.uk/dmg/arm64-mkvtoolnix-gui/1.2/MKVToolNix-98.0.dmg) |
 
 In releases 1.x of the repo, modifications to mkvtoolnix build and configuration scripts are applied as patches to the original source to achieve automated notarization. The goal is to incorporate these modifications into the mkvtoolnix source so that this repo becomes a benign packaging layer enabling distribution of notarized Apple Silicon (ARM64) MKVToolNix GUI releases.
+
+The rest of this README.md file is essentially a record of the steps taken to build, sign and notarize an MVKToolNix GUI disk image ready for installation on macOS.
 
 ## Export a code-signing certificate
 On a Mac used to sign macOS applications, open Keychain Access and in the login keychain, click My Certificates and export your Developer ID Application certificate using 'File | Export Items' and select the file format 'Personal Information Exchange (.p12)'. 
