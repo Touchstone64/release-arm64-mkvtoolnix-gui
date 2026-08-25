@@ -7,6 +7,8 @@ These artefacts have been used to package notarized releases of the MKVToolNix G
 
 | repo | MVKToolNix GUI | DMG revision | Built on macOS | Apple silicon | Intel | Universal |
 |:----:|:--------------:|:-----:|:-----:|:----------:|:----------:|:----------:|
+| 1.6  | 101.0 |1| 26.6.2   | [download](https://mkvtoolnix.download/macos/releases/101.0/MKVToolNix-101.0-1-arm64.dmg) ([sha-512](https://mkvtoolnix.download/macos/releases/101.0/MKVToolNix-101.0-1-arm64.dmg.sha512)) | - | [download](https://mkvtoolnix.download/macos/releases/101.0/MKVToolNix-101.0-1-universal.dmg) ([sha-512](https://mkvtoolnix.download/macos/releases/101.0/MKVToolNix-101.0-1-universal.dmg.sha512)) |
+|      |      |1| 15.7.9 | - | [download](https://mkvtoolnix.download/macos/releases/101.0/MKVToolNix-101.0-1-x86_64.dmg) ([sha-512](https://mkvtoolnix.download/macos/releases/101.0/MKVToolNix-101.0-1-x86_64.dmg.sha512)) | [download](https://mkvtoolnix.download/macos/releases/101.0/MKVToolNix-101.0-1-universal.dmg) ([sha-512](https://mkvtoolnix.download/macos/releases/101.0/MKVToolNix-101.0-1-universal.dmg.sha512)) |
 | 1.5  | 100.0 |1| 26.5.2   | [download](https://mkvtoolnix.download/macos/releases/100.0/MKVToolNix-100.0-1-arm64.dmg) ([sha-512](https://mkvtoolnix.download/macos/releases/100.0/MKVToolNix-100.0-1-arm64.dmg.sha512)) | - | [download](https://mkvtoolnix.download/macos/releases/100.0/MKVToolNix-100.0-1-universal.dmg) ([sha-512](https://mkvtoolnix.download/macos/releases/100.0/MKVToolNix-100.0-1-universal.dmg.sha512)) |
 |      |      |1| 15.7.7 | - | [download](https://mkvtoolnix.download/macos/releases/100.0/MKVToolNix-100.0-1-x86_64.dmg) ([sha-512](https://mkvtoolnix.download/macos/releases/100.0/MKVToolNix-100.0-1-x86_64.dmg.sha512)) | [download](https://mkvtoolnix.download/macos/releases/100.0/MKVToolNix-100.0-1-universal.dmg) ([sha-512](https://mkvtoolnix.download/macos/releases/100.0/MKVToolNix-100.0-1-universal.dmg.sha512)) |
 | 1.4  | 99.0 |1| 26.5   | [download](https://mkvtoolnix.download/macos/releases/99.0/MKVToolNix-99.0-1-arm64.dmg) ([sha-512](https://mkvtoolnix.download/macos/releases/99.0/MKVToolNix-99.0-1-arm64.dmg.sha512)) | - | [download](https://mkvtoolnix.download/macos/releases/99.0/MKVToolNix-99.0-1-universal.dmg) ([sha-512](https://mkvtoolnix.download/macos/releases/99.0/MKVToolNix-99.0-1-universal.dmg.sha512)) |
@@ -136,3 +138,9 @@ Using release 98.0 as an example, in your terminal:
 By default the build script uses ~/opt and ~/tmp to build and assemble all the component parts needed to create the MKVToolNix GUI from source.
 
 The signed and (optionally) notarized disk image will be located at ~/tmp/compile/MKVToolNix-98.0-r-arm64.dmg or MKVToolNix-98.0-r-x86_64.dmg (depending on your Mac's CPU type) where `r` is the DMG revision.
+
+## Publishing the DMGs
+
+'Publish' the arm64 and x86_64 DMGs (to automate the DMG revision numbering) using `./publish_revision.sh 98.0 arm64` and `./publish_revision.sh 98.0 x86_64` respectively.
+
+The universal DMG is created using `tools/build_universal_dmg.sh` which takes the paths to the arm64 and x86_64 DMGs, and the directory to generate the universal DMG in, as arguments.
